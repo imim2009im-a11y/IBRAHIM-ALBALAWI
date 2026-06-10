@@ -1,0 +1,6 @@
+{
+  "name": "Command Pattern Simulator",
+  "description": "An interactive, visual playground demonstrating the Advanced Command Pattern with Command History, Undo/Redo operations, Macro building, a Simulated File System, and live State Tracking.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
