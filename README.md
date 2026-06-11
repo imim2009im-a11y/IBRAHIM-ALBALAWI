@@ -1,20 +1,69 @@
-<div align="center">
-<img width="1200" height="475" alt="GHBanner" src="https://ai.google.dev/static/site-assets/images/share-ais-513315318.png" />
-</div>
+# Command Pattern Simulator
 
-# Run and deploy your AI Studio app
+Interactive React + TypeScript simulator for understanding the **Command Pattern** through a visual playground.
 
-This contains everything you need to run your app locally.
+The app demonstrates command history, undo/redo, macro commands, safe rollback behavior, a simulated file system, a simulated user database, and live state tracking.
 
-View your app in AI Studio: https://ai.studio/apps/1482c312-d33c-42f3-892f-f7b04e0bcee2
+## Features
+
+- Visual Command Pattern workflow
+- Command history with undo/redo
+- Macro command builder
+- Simulated file system and database operations
+- Rollback behavior for failed operations
+- Code snippets and architecture explanation
+- Local session persistence using browser `localStorage`
+
+## Tech Stack
+
+- React
+- TypeScript
+- Vite
+- Tailwind CSS
+- Lucide React
+- Motion
 
 ## Run Locally
 
-**Prerequisites:**  Node.js
+```bash
+npm install
+npm run dev
+```
 
+Then open:
 
-1. Install dependencies:
-   `npm install`
-2. Set the `GEMINI_API_KEY` in [.env.local](.env.local) to your Gemini API key
-3. Run the app:
-   `npm run dev`
+```text
+http://localhost:3000
+```
+
+## Build
+
+```bash
+npm run build
+```
+
+## Preview Production Build
+
+```bash
+npm run preview
+```
+
+## GitHub Pages
+
+To deploy with GitHub Pages, add a deployment workflow and set the Vite base path to:
+
+```text
+/IBRAHIM-ALBALAWI/
+```
+
+If the repository remains private, GitHub Pages availability depends on your GitHub account and repository settings.
+
+## Security Notes
+
+- Real `.env` files are ignored by Git.
+- `.env.example` contains placeholders only.
+- Do not commit real API keys or production secrets.
+
+## Project Owner
+
+Built as an independent project for **Ibrahim Albalawi**.
