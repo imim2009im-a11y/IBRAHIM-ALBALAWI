@@ -34,6 +34,19 @@ jobs:
       - name: Build
         run: npm run build
 
+      - name: Scrub demo credentials from built assets
+        run: |
+          set -euo pipefail
+          find dist -type f \( -name "*.js" -o -name "*.html" -o -name "*.css" \) -print0 \
+            | xargs -0 sed -i \
+              -e 's/GEMINI_API_KEY=ai_studio_active_session_token_xyz_9988/GEMINI_API_KEY=DEMO_KEY_REDACTED/g' \
+              -e 's#DATABASE_URL=postgresql://sandbox_admin:highly_secure_pass@localhost:5432#DATABASE_URL=postgresql://demo_user:demo_password@localhost:5432#g'
+
+          if grep -R "ai_studio_active_session_token_xyz_9988\|highly_secure_pass" dist; then
+            echo "Sensitive demo credentials are still present in built assets. Failing deploy."
+            exit 1
+          fi
+
       - name: Setup Pages
         uses: actions/configure-pages@v5
 
