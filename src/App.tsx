@@ -72,7 +72,7 @@ export default function App() {
   const [filesState, setFilesState] = useState<Record<string, string>>({
     "temp-demo/important-file.txt": "This is an important file. Do not delete without backup.",
     "temp-demo/config.json": "{\n  \"server\": \"staging-east-cluster\",\n  \"auth\": true,\n  \"version\": \"2.1.0\"\n}",
-    "temp-demo/secrets.env": "GEMINI_API_KEY=ai_studio_active_session_token_xyz_9988\nDATABASE_URL=postgresql://sandbox_admin:highly_secure_pass@localhost:5432"
+    "temp-demo/secrets.env": "GEMINI_API_KEY=demo-placeholder-not-a-secret\nDATABASE_URL=postgresql://demo_user:demo_password@localhost:5432/demo_db"
   });
 
   const [backupsState, setBackupsState] = useState<Record<string, string>>({});
@@ -285,7 +285,7 @@ export default function App() {
     envRef.current.files.clear();
     envRef.current.files.set("temp-demo/important-file.txt", "This is an important file. Do not delete without backup.");
     envRef.current.files.set("temp-demo/config.json", "{\n  \"server\": \"staging-east-cluster\",\n  \"auth\": true,\n  \"version\": \"2.1.0\"\n}");
-    envRef.current.files.set("temp-demo/secrets.env", "GEMINI_API_KEY=ai_studio_active_session_token_xyz_9988\nDATABASE_URL=postgresql://sandbox_admin:highly_secure_pass@localhost:5432");
+    envRef.current.files.set("temp-demo/secrets.env", "GEMINI_API_KEY=demo-placeholder-not-a-secret\nDATABASE_URL=postgresql://demo_user:demo_password@localhost:5432/demo_db");
 
     // Reset backups
     envRef.current.backups.clear();
