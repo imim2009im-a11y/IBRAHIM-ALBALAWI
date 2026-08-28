@@ -1,0 +1,39 @@
+name: One-time lockfile repair
+
+on:
+  push:
+    branches: [audit/quality-security-20260828]
+
+permissions:
+  contents: write
+
+jobs:
+  repair:
+    if: github.actor != 'github-actions[bot]'
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: audit/quality-security-20260828
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - name: Rebuild lockfile from package manifest
+        run: npm install --package-lock-only
+      - name: Verify repaired project
+        run: |
+          npm ci
+          npm run lint
+          npm run build
+          npm audit --omit=dev --audit-level=high
+      - name: Remove one-time workflow
+        run: rm .github/workflows/repair-lockfile.yml
+      - name: Commit verified lockfile
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add package-lock.json package.json .github/workflows/repair-lockfile.yml
+          git commit -m "fix: synchronize npm lockfile"
+          git push origin HEAD:audit/quality-security-20260828
