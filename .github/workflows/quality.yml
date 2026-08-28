@@ -1,3 +1,4 @@
+# Reproducible build and production dependency security gate.
 name: Quality and Security Gate
 
 on:
