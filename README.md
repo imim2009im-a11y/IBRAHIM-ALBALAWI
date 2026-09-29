@@ -1,5 +1,7 @@
 # Command Pattern Simulator
 
+> An interactive engineering playground for learning and testing the Command Pattern with explicit state, history, and rollback behavior.
+
 Interactive React + TypeScript simulator for understanding the **Command Pattern** through a visual playground.
 
 The app demonstrates command history, undo/redo, macro commands, safe rollback behavior, a simulated file system, a simulated user database, and live state tracking.
@@ -64,6 +66,10 @@ If the repository remains private, GitHub Pages availability depends on your Git
 - `.env.example` contains placeholders only.
 - Do not commit real API keys or production secrets.
 
+## Engineering focus
+
+This project is intentionally simulation-only: file-system and user-database actions are local models, not privileged operating-system operations. The design focuses on command encapsulation, reversible state transitions, and observable behavior.
+
 ## Project Owner
 
-Built as an independent project for **Ibrahim Albalawi**.
+Built as an independent engineering project by **Ibrahim Albalawi**.
