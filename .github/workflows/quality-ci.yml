@@ -1,0 +1,38 @@
+name: Quality CI
+
+on:
+  push:
+    branches: [main, master]
+  pull_request:
+    branches: [main, master]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    name: Syntax and repository checks
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Checkout
+        uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # v6.0.3
+        with:
+          persist-credentials: false
+      - name: Check whitespace errors
+        run: git diff --check
+      - name: Parse JavaScript sources
+        shell: bash
+        run: |
+          set -euo pipefail
+          while IFS= read -r file; do
+            node --check "$file"
+          done < <(find . -type f \( -name '*.js' -o -name '*.mjs' -o -name '*.cjs' \) -not -path '*/node_modules/*' -not -path './.git/*' | sort)
+      - name: Validate package manifests
+        shell: bash
+        run: |
+          set -euo pipefail
+          while IFS= read -r file; do
+            node -e "JSON.parse(require('fs').readFileSync(process.argv[1], 'utf8'))" "$file"
+          done < <(find . -type f -name 'package.json' -not -path '*/node_modules/*' -not -path './.git/*' | sort)
